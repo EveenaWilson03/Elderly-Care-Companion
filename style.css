@@ -1,0 +1,41 @@
+body {
+    font-family: Arial;
+    background-color: #eef2ff;
+    text-align: center;
+    padding-top: 50px;
+}
+
+.card {
+    background: white;
+    width: 400px;
+    margin: auto;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+
+input {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+button {
+    width: 95%;
+    padding: 12px;
+    background: #4a6cff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #2f4ed8;
+}
+
+.danger {
+    background: #ff4a4a;
+    margin-top: 15px;
+}
