@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Elderly Care Voice Companion</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f6ff;
+      padding: 30px;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    h1 {
+      text-align: center;
+      color: #2b4eff;
+    }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      font-size: 18px;
+      margin-top: 15px;
+      cursor: pointer;
+      border: none;
+      border-radius: 8px;
+    }
+
+    .voice-btn {
+      background-color: #4caf50;
+      color: white;
+    }
+
+    .emergency-btn {
+      background-color: #e53935;
+      color: white;
+    }
+
+    .box {
+      background-color: white;
+      border-radius: 6px;
+      padding: 15px;
+      margin-top: 10px;
+      min-height: 40px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>👵 Elderly Care Voice Companion</h1>
+
+  <button class="voice-btn" onclick="startListening()">
+    🎙️ Talk to Companion
+  </button>
+
+  <p><strong>You said:</strong></p>
+  <div id="userText" class="box"></div>
+
+  <p><strong>Assistant reply:</strong></p>
+  <div id="botText" class="box"></div>
+
+  <button class="emergency-btn" onclick="sendEmergency()">
+    🚨 Emergency Help
+  </button>
+
+  <script>
+    function startListening() {
+      const SpeechRecognition =
+        window.SpeechRecognition || window.webkitSpeechRecognition;
+
+      if (!SpeechRecognition) {
+        alert("Voice recognition not supported in this browser");
+        return;
+      }
+
+      const recognition = new SpeechRecognition();
+      recognition.lang = "en-US";
+      recognition.start();
+
+      recognition.onresult = function (event) {
+        const text = event.results[0][0].transcript;
+        document.getElementById("userText").innerText = text;
+        respond(text);
+      };
+    }
+
+    function respond(text) {
+      text = text.toLowerCase();
+      let reply = "I am here to help you.";
+
+      if (text.includes("medicine")) {
+        reply = "Please take your medicine on time.";
+      } 
+      else if (text.includes("help")) {
+        reply = "Emergency help is being notified.";
+      } 
+      else if (text.includes("hello")) {
+        reply = "Hello! How are you feeling today?";
+      }
+
+      document.getElementById("botText").innerText = reply;
+
+      const speech = new SpeechSynthesisUtterance(reply);
+      speech.lang = "en-US";
+      window.speechSynthesis.speak(speech);
+    }
+
+    function sendEmergency() {
+      alert("🚨 Emergency alert sent to caregiver!");
+    }
+  </script>
+
+</body>
+</html>
